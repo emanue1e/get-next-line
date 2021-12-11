@@ -6,7 +6,7 @@
 /*   By: emanuele <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 17:25:46 by emanuele          #+#    #+#             */
-/*   Updated: 2021/12/11 17:27:49 by emanuele         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:37:03 by emanuele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_strlen(char *str)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (str[i])
 		i++;
@@ -24,25 +24,29 @@ int	ft_strlen(char *str)
 
 char	*ft_strchr(const char *str, int c)
 {
-	if (!str)
-		return NULL;
-	char *s;
-	
+	char	*s;
+
 	s = (char *)str;
+	if (!str)
+		return (NULL);
 	while (*s && *s != (unsigned char)c)
 		s++;
 	if (*s == (unsigned char)c)
 		return (s);
-	return NULL;
+	return (NULL);
 }
 
-char *ft_substr(char *s, int start, int len)
+char	*ft_substr(char *s, int start, int len)
 {
-	int i = 0, j = 0;
-	char *dest;
+	int		i;
+	int		j;
+	char	*dest;
+
+	i = 0;
+	j = 0;
 	dest = (char *)malloc(sizeof(char) * (len + 1));
 	if (!dest)
-		return NULL;
+		return (NULL);
 	while (s[i])
 	{
 		if (i >= start && j < len)
@@ -50,18 +54,22 @@ char *ft_substr(char *s, int start, int len)
 		i++;
 	}
 	dest[j] = '\0';
-	return dest;
+	return (dest);
 }
 
-char *ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
+	int		i;
+	int		j;
+	char	*dest;
+
+	i = 0;
+	j = 0;
 	if (!s1 || !s2)
-		return NULL;
-	int i = 0, j = 0;
-	char *dest;
+		return (NULL);
 	dest = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!dest)
-		return NULL;
+		return (NULL);
 	while (s1[i])
 	{
 		dest[i] = s1[i];
@@ -74,24 +82,5 @@ char *ft_strjoin(char *s1, char *s2)
 	}
 	free(s1);
 	dest[i + j] = '\0';
-	return dest;
+	return (dest);
 }
-
-char *ft_tail(char *tail, int *n)
-{
-	char *str = ft_substr(tail, *n + 1, ft_strlen(tail));
-	free(tail);
-	return str;
-}
-
-char *ft_line(char *tail, int *n)
-{
-	int i = 0;
-	char *line;
-	while (tail[i] != '\n' && tail[i])
-		i++;
-	line = ft_substr(tail, 0, i + 1);
-	*n = i;
-	return line;
-}
-
