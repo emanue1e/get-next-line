@@ -6,29 +6,33 @@
 /*   By: emanuele <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 17:25:46 by emanuele          #+#    #+#             */
-/*   Updated: 2021/12/11 17:25:53 by emanuele         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:27:49 by emanuele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int i = 0;
+	int i;
+	
+	i = 0;
 	while (str[i])
 		i++;
-	return i;
+	return (i);
 }
 
-char *ft_strchr(const char *str, int c)
+char	*ft_strchr(const char *str, int c)
 {
 	if (!str)
 		return NULL;
-	char *s = (char *)str;
+	char *s;
+	
+	s = (char *)str;
 	while (*s && *s != (unsigned char)c)
 		s++;
 	if (*s == (unsigned char)c)
-		return s;
+		return (s);
 	return NULL;
 }
 
