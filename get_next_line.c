@@ -6,7 +6,7 @@
 /*   By: emanuele <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 06:31:20 by emanuele          #+#    #+#             */
-/*   Updated: 2021/12/11 17:36:40 by emanuele         ###   ########.fr       */
+/*   Updated: 2021/12/11 23:03:39 by emanuele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,39 +36,41 @@ static char	*ft_line(char *tail, int *n)
 
 static char	*ft_read(int fd, char *tail)
 {
-	int count_read = 1;
-	char buf[BUFFER_SIZE + 1];
+	int		count_read;
+	char	buf[BUFFER_SIZE + 1];
+
+	count_read = 1;
 	while (count_read > 0 && !ft_strchr(tail, '\n'))
 	{
 		count_read = read(fd, buf, BUFFER_SIZE);
 		if (count_read < 0)
-			return NULL;
-		buf[count_read] = '\0';
+			return (NULL);
+			buf[count_read] = '\0';
 		if (!tail)
 			tail = ft_substr(buf, 0, count_read);
 		else
 			tail = ft_strjoin(tail, buf);
 	}
-	return tail;
+	return (tail);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	int n;
-	static char *tail;
-	char *line;
+	static char	*tail;
+	char		*line;
+	int			n;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || (read(fd, 0, 0) < 0))
-		return NULL;
+		return (NULL);
 	tail = ft_read(fd, tail);
 	if (!tail[0])
 	{
 		free(tail);
-		tail = NULL;
-		return NULL;
+		tail = (NULL);
+		return (NULL);
 	}
 	n = 0;
 	line = ft_line(tail, &n);
 	tail = ft_tail(tail, &n);
-	return line;
+	return (line);
 }
