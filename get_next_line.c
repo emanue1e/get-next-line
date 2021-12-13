@@ -45,7 +45,7 @@ static char	*ft_read(int fd, char *tail)
 		count_read = read(fd, buf, BUFFER_SIZE);
 		if (count_read < 0)
 			return (NULL);
-			buf[count_read] = '\0';
+		buf[count_read] = '\0';
 		if (!tail)
 			tail = ft_substr(buf, 0, count_read);
 		else
